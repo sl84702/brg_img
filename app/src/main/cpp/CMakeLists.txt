@@ -47,6 +47,7 @@ find_library( EGL-lib EGL
 
 target_link_libraries( # Specifies the target library.
         nativelib
+        -ljnigraphics
 
         # Links the target library to the log library
         # included in the NDK.

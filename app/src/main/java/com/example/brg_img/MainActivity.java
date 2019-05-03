@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapShader;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.BitmapDrawable;
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_res);
         Bitmap bm = openBitmap(bitmap);
-        
+
         this.imageView.setImageBitmap(bm);
 
 
