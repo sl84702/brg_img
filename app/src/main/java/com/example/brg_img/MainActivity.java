@@ -11,6 +11,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -20,6 +23,8 @@ import android.util.Log;
 import android.view.View;
 
 import android.widget.TextView;
+
+import android.graphics.Color;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -86,8 +91,12 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_res);
         Bitmap bm = openBitmap(bitmap);
-        int id = viewImage(R.drawable.img_res);
-        this.imageView.setImageResource(id);
+        
+        this.imageView.setImageBitmap(bm);
+
+
+//        int id = viewImage(R.drawable.img_res);
+//        this.imageView.setImageResource(id);
     }
 
 }
