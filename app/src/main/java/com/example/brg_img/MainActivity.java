@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import java.io.*;
 
 
 import android.app.Activity;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("nativelib");
     }
 
-    public native Bitmap changeImage(Bitmap bitmap);
+    public native byte[] changeImage(byte[] imageBytes);
 
 
     private ImageView imageView;
@@ -78,9 +79,19 @@ public class MainActivity extends AppCompatActivity {
     private void showImagePost() {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_res);
-        Bitmap bm = changeImage(bitmap);
 
-        this.imageView.setImageBitmap(bm);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] imageBytes = stream.toByteArray();
+
+
+        byte[] newImageBytes = changeImage(imageBytes);
+
+        InputStream inputStream = new ByteArrayInputStream(newImageBytes);
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        Bitmap new_bitmap = BitmapFactory.decodeStream(inputStream, null, o);
+
+        this.imageView.setImageBitmap(new_bitmap);
 
     }
 
