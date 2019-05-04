@@ -89,9 +89,9 @@ public class MainActivity extends AppCompatActivity {
 
         InputStream inputStream = new ByteArrayInputStream(newImageBytes);
         BitmapFactory.Options o = new BitmapFactory.Options();
-        Bitmap new_bitmap = BitmapFactory.decodeStream(inputStream, null, o);
+        Bitmap newBitmap = BitmapFactory.decodeStream(inputStream, null, o);
 
-        this.imageView.setImageBitmap(new_bitmap);
+        this.imageView.setImageBitmap(newBitmap);
 
     }
 

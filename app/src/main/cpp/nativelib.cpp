@@ -101,8 +101,3 @@ void createContext(void) {
         LOGE("error make current");
     }
 }
-
-
-jobject convertBitmapToArray(jobject bitmap) {
-
-}
