@@ -36,15 +36,8 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("nativelib");
     }
 
-    public native String stringFromJNI();
-    int a = 1;
-    int b = 2;
+    public native Bitmap changeImage(Bitmap bitmap);
 
-    public native String hwToConsole(int n1, int n2);
-    public native int viewImage(int imgID);
-    public native Bitmap openBitmap(Bitmap bitmap);
-
-    String res = hwToConsole(a, b);
 
     private ImageView imageView;
     private Button button1;
@@ -54,13 +47,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Example of a call to a native method
-//        TextView tv = findViewById(R.id.sample_text);
-
-//        System.loadLibrary("nativelib");
-//        nativelib nl = new nativelib();
-//        String res = hwToConsole(a, b);
 
 
         this.imageView = (ImageView) this.findViewById(R.id.imageView);
@@ -92,13 +78,10 @@ public class MainActivity extends AppCompatActivity {
     private void showImagePost() {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_res);
-        Bitmap bm = openBitmap(bitmap);
+        Bitmap bm = changeImage(bitmap);
 
         this.imageView.setImageBitmap(bm);
 
-
-//        int id = viewImage(R.drawable.img_res);
-//        this.imageView.setImageResource(id);
     }
 
 }
