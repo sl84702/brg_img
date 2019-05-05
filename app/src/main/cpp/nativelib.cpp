@@ -7,8 +7,15 @@
 #include <EGL/eglext.h>
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
-#include <GLES2/gl2.h>
+//#include <GLES2/gl2.h>
+#include <GLES3/gl3.h>
+#include <GLES3/gl32.h>
+#include <GLES3/gl3platform.h>
+#include <GLES3/gl3ext.h>
 #include <GLES/gl.h>
+#include <GLES/GL.h>
+#include <GLES/glplatform.h>
+#include <GLES/glext.h>
 
 
 #include <android/log.h>
@@ -32,6 +39,28 @@ Java_com_example_brg_1img_MainActivity_changeImage(
         jbyteArray image) {
 
     createContext();
+
+    auto len = env->GetArrayLength(image);
+    unsigned char* buf = new unsigned char[len];
+    env->GetByteArrayRegion (image, 0, len, reinterpret_cast<jbyte*>(buf));
+
+
+    GLuint ssbo;
+    glGenBuffers(1, &ssbo);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, len, 0, GL_STATIC_DRAW);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo);
+    glBufferSubData(GL_SHADER_STORAGE_BUFFER, 0, len, buf);
+
+    GLint size = 0;
+    glGetBufferParameteriv(GL_SHADER_STORAGE_BUFFER, GL_BUFFER_SIZE, &size);
+    if(len != size)
+    {
+        glDeleteBuffers(1, &ssbo);
+        LOGE("SSBO ERROR");
+        return NULL;
+    }
+
 
     return image;
 

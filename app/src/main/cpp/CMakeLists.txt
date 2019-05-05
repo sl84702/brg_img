@@ -37,9 +37,6 @@ find_library(android-lib android)
 find_library( EGL-lib EGL
         )
 
-#find_library( GLESv3-lib libEGL
-#        )
-
 
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in this
@@ -48,10 +45,12 @@ find_library( EGL-lib EGL
 target_link_libraries( # Specifies the target library.
         nativelib
         -ljnigraphics
+        -lGLESv3
+        -lEGL
 
         # Links the target library to the log library
         # included in the NDK.
         ${android-lib}
         ${EGL-lib}
-#        ${GLESv3-lib}
+        ${libEGL}
         ${log-lib})
